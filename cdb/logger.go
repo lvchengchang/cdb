@@ -3,13 +3,14 @@ package cdb
 import "log"
 
 type Logger struct {
-	LogLevel  Level
-	LogPrefix string
+	LogLevel  Level  `toml:"loglevel"`
+	LogPrefix string `toml:"logprefix"`
+	LogDir    string `toml:"logdir"`
 }
 
 const DEFAULTPREFIX = "Cdb"
 
-func NewLogger() *Logger {
+func NewLogger(path string) *Logger {
 	return &Logger{
 		LogLevel:  DEBUG,
 		LogPrefix: DEFAULTPREFIX,

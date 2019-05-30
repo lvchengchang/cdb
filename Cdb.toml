@@ -1,0 +1,4 @@
+[Logger]
+LogLevel = 1
+logprefix = "cdb"
+logdir = "/tmp/log/coupon"
