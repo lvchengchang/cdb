@@ -25,7 +25,7 @@ type Item struct {
 func Open(dbName string) (*Cdb, error) {
 	var err error
 	cdb := &Cdb{}
-	cdb.keys = cbtree.New(btreeDegrees, "keys")
+	cdb.keys = cbtree.New(btreeDegrees, nil)
 
 	cdb.file, err = os.OpenFile(dbName+fileSuffix, os.O_CREATE|os.O_RDWR, 0666)
 	if err != nil {
@@ -51,16 +51,9 @@ func (cdb *Cdb) Get(key string) *Item {
 	return data.(*Item)
 }
 
-func (cdb *Cdb) reload() {
-
-}
-
 func (cdb *Cdb) Close() {
 	cdb.file.Close()
-}
-
-func (cdb *Cdb) syncDisk() {
-
+	syncFail.Close()
 }
 
 func (i1 *Item) Less(item cbtree.Item, ctx interface{}) bool {
