@@ -23,5 +23,10 @@ func main() {
 		log.Println(err)
 		os.Exit(1)
 	}
-	op.Logger.LogDebug("option success")
+	op.Logger.RecordLogData("option success")
+	c, err := cdb.Open("cdb")
+	if err != nil {
+		log.Panicln(err)
+	}
+	defer c.Close()
 }
